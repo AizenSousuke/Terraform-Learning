@@ -14,19 +14,20 @@ provider "aws" {
     skip_metadata_api_check     = true
     skip_requesting_account_id  = true
     endpoints {
+        ec2 = "http://172.17.0.1:4566" # or localhost if running from host
         s3 = "http://172.17.0.1:4566" # or localhost if running from host
         # add other services as needed
     }
 }
 
-# resource "aws_instance" "web-server" {
-#     ami = ""
-#     instance_type = "t2.micro"
-#     count = 1
-#     tags = {
-#         Name = "web-server-${count.index}"
-#     }
-# }
+resource "aws_instance" "web-server" {
+    ami = "ami-06ca3ca175f37dd66"
+    instance_type = "t2.micro"
+    count = 1
+    tags = {
+        Name = "web-server-${count.index}"
+    }
+}
 
 resource "aws_s3_bucket" "s3-bucket" {
   bucket = "my-test-bucket"
