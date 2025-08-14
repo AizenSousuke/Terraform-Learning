@@ -1,0 +1,14 @@
+name: Localstack
+services:
+  localstack:
+    image: localstack/localstack
+    container_name: localstack
+    ports:
+      - "4566:4566"
+      - "4571:4571"
+    environment:
+      - SERVICES=serverless,s3,rds,sqs,sns,cloudformation
+      - DEBUG=1
+      - DOCKER_HOST=npipe:////./pipe/docker_engine  
+    volumes:
+      - "//./pipe/docker_engine://./pipe/docker_engine" 
